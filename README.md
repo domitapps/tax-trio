@@ -7,8 +7,16 @@ Statyczna strona biura rachunkowego, zbudowana w [Astro](https://astro.build). S
 ```bash
 npm install
 npm run dev      # podgląd z odświeżaniem: http://localhost:4321
-npm run build    # wynik w dist/ (gotowy do wgrania na Cloudflare Pages / Netlify)
+npm run build    # wynik w dist/
 ```
+
+## Publikacja
+
+Strona jest publikowana na GitHub Pages: https://domitapps.github.io/tax-trio/
+Każdy push na `main` uruchamia workflow `.github/workflows/deploy.yml`, który buduje i wdraża stronę.
+
+Własna domena (np. `taxtrio.pl`): dodaj ją w Settings → Pages → Custom domain, a w workflow ustaw
+`SITE: https://taxtrio.pl` i `BASE_PATH: /`.
 
 ## Gdzie co zmieniać
 
@@ -23,6 +31,6 @@ npm run build    # wynik w dist/ (gotowy do wgrania na Cloudflare Pages / Netlif
 - [ ] Wspólny telefon biura, forma prawna, NIP, REGON
 - [ ] Zatwierdzenie cen przez Wspólniczki (obecne są propozycją)
 - [ ] Klucz Web3Forms (`web3formsKey`) wygenerowany dla adresu e-mail biura
-- [ ] Domena (roboczo `taxtrio.pl`): zmień ją w `site.ts`, `astro.config.mjs` i `public/robots.txt`
+- [ ] Domena (roboczo `taxtrio.pl`): zmień ją w `site.ts` oraz w workflow (patrz „Publikacja”)
 - [ ] Weryfikacja treści polityki prywatności
 - [ ] Profil Firmy w Google (biuro bez adresu, obszar obsługi: Inowrocław i okolice)
