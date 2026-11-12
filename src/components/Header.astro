@@ -1,19 +1,20 @@
 ---
 import Logo from './Logo.astro';
 import { site } from '../data/site';
+import { url } from '../lib/url';
 
 const links = [
-  { href: '/#dlaczego-my', label: 'Dlaczego my' },
-  { href: '/#uslugi', label: 'Usługi' },
-  { href: '/#zespol', label: 'Kim jesteśmy' },
-  { href: '/#cennik', label: 'Cennik' },
-  { href: '/#faq', label: 'FAQ' },
+  { href: url('/#dlaczego-my'), label: 'Dlaczego my' },
+  { href: url('/#uslugi'), label: 'Usługi' },
+  { href: url('/#zespol'), label: 'Kim jesteśmy' },
+  { href: url('/#cennik'), label: 'Cennik' },
+  { href: url('/#faq'), label: 'FAQ' },
 ];
 ---
 
 <header class="header">
   <div class="container header__inner">
-    <a href="/" class="header__logo"><Logo /></a>
+    <a href={url('/')} class="header__logo"><Logo /></a>
 
     <button class="header__toggle" aria-expanded="false" aria-controls="nav" aria-label="Otwórz menu">
       <span></span><span></span><span></span>
@@ -25,7 +26,7 @@ const links = [
       </ul>
       <div class="nav__cta">
         <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="nav__phone">{site.phone}</a>
-        <a href="/#kontakt" class="btn btn--primary">Bezpłatna wycena</a>
+        <a href={url('/#kontakt')} class="btn btn--primary">Bezpłatna wycena</a>
       </div>
     </nav>
   </div>

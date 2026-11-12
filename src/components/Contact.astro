@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { url } from '../lib/url';
 ---
 
 <section id="kontakt" class="section section--alt">
@@ -93,7 +94,7 @@ import { site } from '../data/site';
         <input type="checkbox" name="zgoda_rodo" value="tak" required />
         <span
           >Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a
-            href="/polityka-prywatnosci">polityką prywatności</a
+            href={url('/polityka-prywatnosci')}>polityką prywatności</a
           >.*</span
         >
       </label>

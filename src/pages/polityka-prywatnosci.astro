@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+import { url } from '../lib/url';
 ---
 
 <Base
@@ -61,7 +62,7 @@ import { site } from '../data/site';
       <h2>7. Dobrowolność podania danych</h2>
       <p>Podanie danych jest dobrowolne, ale niezbędne do udzielenia odpowiedzi na zapytanie.</p>
 
-      <p><a href="/">← Wróć na stronę główną</a></p>
+      <p><a href={url('/')}>← Wróć na stronę główną</a></p>
     </div>
   </section>
 </Base>
