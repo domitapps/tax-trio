@@ -1,0 +1,99 @@
+---
+import { site } from '../data/site';
+const steps = [
+  {
+    title: 'Kontakt',
+    text: 'Dzwonią Państwo, piszą lub wypełniają formularz. Odpowiadamy w ciągu jednego dnia roboczego.',
+  },
+  {
+    title: 'Rozmowa i wycena',
+    text: 'Poznajemy Państwa firmę: telefonicznie, online albo na miejscu. Otrzymują Państwo konkretną, stałą cenę.',
+  },
+  {
+    title: 'Przejęcie dokumentacji',
+    text: 'Podpisujemy umowę i pełnomocnictwa, a dokumentację od poprzedniego biura przejmujemy sami.',
+  },
+  {
+    title: 'Stała współpraca',
+    text: 'Dokumenty wysyłają Państwo e-mailem. My księgujemy, sprawdzamy w dwie osoby i pilnujemy terminów.',
+  },
+];
+---
+
+<section id="jak-pracujemy" class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Jak pracujemy</span>
+      <h2>Prosto od pierwszego telefonu</h2>
+      <p class="lead">
+        Nie mamy biura stacjonarnego, więc to my przyjeżdżamy do Państwa. Obsługujemy {site.serviceArea.join(', ')}, a
+        zdalnie także firmy z całej Polski.
+      </p>
+    </div>
+    <ol class="steps">
+      {
+        steps.map((s, i) => (
+          <li class="step">
+            <span class="step__num">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+  }
+  .step__num {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    color: var(--navy);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 64px;
+    right: -16px;
+    height: 1px;
+    background: var(--line);
+  }
+  .step p {
+    color: var(--muted);
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+    .step::after {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

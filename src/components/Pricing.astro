@@ -1,0 +1,84 @@
+---
+import { pricing } from '../data/site';
+---
+
+<section id="cennik" class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Cennik</span>
+      <h2>Jasne ceny, bez niespodzianek</h2>
+      <p class="lead">
+        Podajemy ceny minimalne. Ostateczna kwota zależy od liczby dokumentów, pracowników i specyfiki firmy, a przed
+        rozpoczęciem współpracy znają ją Państwo w całości.
+      </p>
+    </div>
+    <div class="grid prices">
+      {
+        pricing.map((p) => (
+          <div class:list={['card', 'price', { 'price--featured': p.featured }]}>
+            <h3>{p.service}</h3>
+            <p class="price__value">{p.price}</p>
+            <p class="price__unit">{p.unit}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="prices__note">
+      <p>Do cen netto należy doliczyć 23% VAT. Wycena jest bezpłatna i niezobowiązująca.</p>
+      <a href="#kontakt" class="btn btn--primary">Wycena dla Państwa firmy</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prices {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .price {
+    background: var(--bg);
+  }
+  .price h3 {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .price__value {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 4px 0 0;
+    line-height: 1.2;
+  }
+  .price__unit {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .price--featured {
+    border: 2px solid var(--gold);
+  }
+  .prices__note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 36px;
+  }
+  .prices__note p {
+    color: var(--muted);
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .prices {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .prices {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import { partners } from '../data/site';
+const initials = (name: string) =>
+  name
+    .split(' ')
+    .map((p) => p[0])
+    .join('')
+    .slice(0, 2);
+---
+
+<section id="zespol" class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Kim jesteśmy</span>
+      <h2>Poznajcie Wspólniczki Tax Trio</h2>
+      <p class="lead">
+        Dwie specjalistki od pełnej księgowości i jedna od kadr i płac. Każdego klienta obsługujemy razem, więc Państwa
+        firmę znają wszystkie trzy.
+      </p>
+    </div>
+    <div class="grid team">
+      {
+        partners.map((p) => (
+          <article class="card person">
+            {p.photo ? (
+              <img class="person__photo" src={p.photo} alt={p.name} width="320" height="320" loading="lazy" />
+            ) : (
+              <div class="person__photo person__photo--placeholder" aria-hidden="true">
+                {initials(p.name)}
+              </div>
+            )}
+            <span class="person__role">{p.role}</span>
+            <h3>{p.name}</h3>
+            <p class="person__exp">{p.experience}</p>
+            <p>{p.bio}</p>
+            <a class="person__phone" href={`tel:${p.phone.replace(/\s/g, '')}`}>
+              {p.phone}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .team {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .person {
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .person__photo {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 22px;
+  }
+  .person__photo--placeholder {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--gold-soft), #e9eef6);
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    color: var(--navy);
+  }
+  .person__role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .person__exp {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .person p:not(.person__exp) {
+    color: var(--muted);
+  }
+  .person__phone {
+    margin-top: auto;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  @media (max-width: 900px) {
+    .team {
+      grid-template-columns: 1fr;
+      max-width: 460px;
+    }
+  }
+</style>

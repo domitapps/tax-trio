@@ -1,0 +1,74 @@
+---
+const reasons = [
+  {
+    title: 'Właścicielki, nie stażyści',
+    text: 'Nie zatrudniamy pracowników i nie planujemy tego. Każdą Państwa sprawą zajmuje się osobiście jedna z nas, czyli osoba, która odpowiada za biuro własnym nazwiskiem.',
+  },
+  {
+    title: 'Dwie pary oczu',
+    text: 'Każdą deklarację i każde zamknięcie miesiąca sprawdza druga Wspólniczka przed wysłaniem. To nasza stała zasada, bo błąd w księgowości kosztuje Państwa pieniądze i nerwy.',
+  },
+  {
+    title: 'Ciągłość bez przestojów',
+    text: 'Pracujemy wspólnie nad każdym klientem. Gdy jedna z nas jest na urlopie, pozostałe dwie znają Państwa firmę i pilnują terminów.',
+  },
+  {
+    title: 'Blisko, lokalnie',
+    text: 'Działamy w Inowrocławiu i okolicach. Przyjedziemy do Państwa siedziby, a na co dzień pracujemy zdalnie, więc dokumenty wystarczy wysłać e-mailem.',
+  },
+];
+---
+
+<section id="dlaczego-my" class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Dlaczego Tax Trio</span>
+      <h2>Małe biuro to Państwa przewaga</h2>
+      <p class="lead">
+        Założyłyśmy własne biuro, żeby pracować tak, jak uważamy za słuszne: starannie, terminowo i w bezpośrednim
+        kontakcie z klientem.
+      </p>
+    </div>
+    <div class="grid why">
+      {
+        reasons.map((r, i) => (
+          <article class="card why__item">
+            <span class="why__num">0{i + 1}</span>
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .why__item {
+    background: var(--bg);
+  }
+  .why__item p {
+    color: var(--muted);
+    margin: 0;
+  }
+  .why__num {
+    display: block;
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  @media (max-width: 1000px) {
+    .why {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .why {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

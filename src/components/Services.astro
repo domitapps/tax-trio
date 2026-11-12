@@ -1,0 +1,75 @@
+---
+import { services } from '../data/site';
+---
+
+<section id="uslugi" class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Usługi</span>
+      <h2>Kompleksowa obsługa Państwa firmy</h2>
+      <p class="lead">
+        Obsługujemy jednoosobowe działalności i spółki z o.o. Od codziennej ewidencji, przez kadry, po kontakt z urzędami.
+      </p>
+    </div>
+    <div class="grid services">
+      {
+        services.map((s) => (
+          <article class:list={['card', 'service', { 'service--featured': s.featured }]}>
+            {s.featured && <span class="service__badge">Nasza specjalizacja</span>}
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .service p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.97rem;
+  }
+  .service--featured {
+    grid-column: span 2;
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .service--featured h3 {
+    color: #fff;
+    font-size: 1.6rem;
+  }
+  .service--featured p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1.05rem;
+  }
+  .service__badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 1000px) {
+    .services {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .services {
+      grid-template-columns: 1fr;
+    }
+    .service--featured {
+      grid-column: auto;
+    }
+  }
+</style>

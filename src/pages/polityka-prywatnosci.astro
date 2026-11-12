@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Polityka prywatności i RODO – Tax Trio"
+  description="Informacje o przetwarzaniu danych osobowych przez Tax Trio – Biuro Rachunkowe."
+>
+  <section class="section">
+    <div class="container legal">
+      <span class="eyebrow">Dokumenty</span>
+      <h1>Polityka prywatności i klauzula informacyjna RODO</h1>
+      <p class="lead">
+        <span class="todo">TODO: treść do weryfikacji przez Wspólniczki lub prawnika przed publikacją.</span>
+      </p>
+
+      <h2>1. Administrator danych</h2>
+      <p>
+        Administratorem danych osobowych jest {site.company.legalName}, NIP {site.company.nip}, REGON {site.company.regon},
+        z siedzibą w {site.city}. Kontakt: <a href={`mailto:${site.email}`}>{site.email}</a>, tel. {site.phone}.
+      </p>
+
+      <h2>2. Cel i podstawa przetwarzania</h2>
+      <p>Dane przesłane przez formularz kontaktowy, e-mail lub telefon przetwarzamy w celu:</p>
+      <ul>
+        <li>odpowiedzi na zapytanie i przygotowania wyceny (art. 6 ust. 1 lit. a i b RODO),</li>
+        <li>zawarcia i wykonania umowy o świadczenie usług księgowych (art. 6 ust. 1 lit. b RODO),</li>
+        <li>wypełnienia obowiązków prawnych, np. podatkowych i rachunkowych (art. 6 ust. 1 lit. c RODO),</li>
+        <li>ewentualnego dochodzenia roszczeń lub obrony przed nimi (art. 6 ust. 1 lit. f RODO).</li>
+      </ul>
+
+      <h2>3. Odbiorcy danych</h2>
+      <p>
+        Dane mogą być przekazywane podmiotom, które wspierają nas technicznie: dostawcy hostingu strony, dostawcy usługi
+        obsługi formularza (Web3Forms) oraz dostawcy poczty e-mail. Nie sprzedajemy danych i nie przekazujemy ich w celach
+        marketingowych.
+      </p>
+
+      <h2>4. Okres przechowywania</h2>
+      <p>
+        Dane z zapytań przechowujemy do czasu udzielenia odpowiedzi, a następnie maksymalnie przez 12 miesięcy, chyba że
+        dojdzie do zawarcia umowy. Wtedy dane przechowujemy przez czas jej trwania oraz przez okres wymagany przepisami
+        prawa.
+      </p>
+
+      <h2>5. Prawa osoby, której dane dotyczą</h2>
+      <p>
+        Mają Państwo prawo do dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz
+        wniesienia sprzeciwu. Zgodę można wycofać w dowolnym momencie, co nie wpływa na zgodność z prawem przetwarzania
+        przed jej wycofaniem. Przysługuje Państwu również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych
+        Osobowych.
+      </p>
+
+      <h2>6. Pliki cookies i analityka</h2>
+      <p>
+        Strona nie używa plików cookies śledzących ani narzędzi analitycznych. Czcionki są serwowane z naszego serwera, bez
+        połączeń z zewnętrznymi dostawcami.
+      </p>
+
+      <h2>7. Dobrowolność podania danych</h2>
+      <p>Podanie danych jest dobrowolne, ale niezbędne do udzielenia odpowiedzi na zapytanie.</p>
+
+      <p><a href="/">← Wróć na stronę główną</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal {
+    max-width: 780px;
+  }
+  .legal h1 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+  }
+  .legal h2 {
+    font-size: 1.35rem;
+    margin-top: 2em;
+  }
+  .legal ul {
+    padding-left: 1.2em;
+  }
+</style>

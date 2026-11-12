@@ -1,0 +1,244 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="kontakt" class="section section--alt">
+  <div class="container contact">
+    <div>
+      <span class="eyebrow">Kontakt i wycena</span>
+      <h2>Porozmawiajmy o Państwa firmie</h2>
+      <p class="lead">
+        Po wysłaniu formularza w ciągu jednego dnia roboczego odezwie się jedna z nas z bezpłatną wyceną. Wolą Państwo
+        zadzwonić? Śmiało.
+      </p>
+      <ul class="contact__list">
+        <li>
+          <span>Telefon</span>
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>
+        </li>
+        <li>
+          <span>E-mail</span>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <span>Godziny</span>
+          {site.hours}
+        </li>
+        <li>
+          <span>Obszar</span>
+          {site.serviceArea.join(' · ')}, a zdalnie cała Polska
+        </li>
+      </ul>
+    </div>
+
+    <form class="card form" action="https://api.web3forms.com/submit" method="POST" id="quote-form">
+      <input type="hidden" name="access_key" value={site.web3formsKey} />
+      <input type="hidden" name="subject" value="Nowe zapytanie o wycenę – taxtrio.pl" />
+      <input type="hidden" name="from_name" value="Formularz Tax Trio" />
+      <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1" autocomplete="off" />
+
+      <div class="form__row">
+        <label>Imię i nazwisko*<input name="name" required autocomplete="name" /></label>
+        <label>Nazwa firmy<input name="firma" autocomplete="organization" /></label>
+      </div>
+      <div class="form__row">
+        <label>E-mail*<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Telefon<input type="tel" name="telefon" autocomplete="tel" /></label>
+      </div>
+      <div class="form__row">
+        <label
+          >Forma prawna
+          <select name="forma_prawna">
+            <option>JDG</option>
+            <option>Spółka z o.o.</option>
+            <option>Inna spółka</option>
+            <option>Osoba prywatna (PIT)</option>
+            <option>Inna</option>
+          </select>
+        </label>
+        <label
+          >Forma księgowości
+          <select name="forma_ksiegowosci">
+            <option>Nie wiem / proszę o doradztwo</option>
+            <option>Ryczałt</option>
+            <option>KPiR</option>
+            <option>Pełna księgowość</option>
+          </select>
+        </label>
+      </div>
+      <div class="form__row">
+        <label
+          >Dokumenty miesięcznie
+          <select name="dokumenty">
+            <option>do 20</option>
+            <option>21–50</option>
+            <option>51–100</option>
+            <option>101–200</option>
+            <option>ponad 200</option>
+          </select>
+        </label>
+        <label
+          >Liczba pracowników
+          <select name="pracownicy">
+            <option>brak</option>
+            <option>1–3</option>
+            <option>4–10</option>
+            <option>11–25</option>
+            <option>ponad 25</option>
+          </select>
+        </label>
+      </div>
+      <label>Wiadomość<textarea name="wiadomosc" rows="4" placeholder="Czym zajmuje się firma, czego Państwo potrzebują?"></textarea></label>
+      <label class="form__consent">
+        <input type="checkbox" name="zgoda_rodo" value="tak" required />
+        <span
+          >Wyrażam zgodę na przetwarzanie moich danych osobowych w celu odpowiedzi na zapytanie, zgodnie z <a
+            href="/polityka-prywatnosci">polityką prywatności</a
+          >.*</span
+        >
+      </label>
+      <button type="submit" class="btn btn--primary">Wyślij zapytanie</button>
+      <p class="form__status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  const status = form?.querySelector<HTMLElement>('.form__status');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+    const button = form.querySelector('button');
+    button?.setAttribute('disabled', '');
+    status.className = 'form__status';
+    status.textContent = 'Wysyłanie…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message);
+      form.reset();
+      status.classList.add('is-ok');
+      status.textContent = 'Dziękujemy! Odezwiemy się w ciągu jednego dnia roboczego.';
+    } catch {
+      status.classList.add('is-error');
+      status.textContent = 'Nie udało się wysłać formularza. Prosimy o kontakt telefoniczny lub e-mail.';
+    } finally {
+      button?.removeAttribute('disabled');
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+    display: grid;
+    gap: 18px;
+  }
+  .contact__list span {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .contact__list a {
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+  .form {
+    display: grid;
+    gap: 16px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+  }
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form label {
+    display: grid;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .form input:not([type='checkbox']),
+  .form select,
+  .form textarea {
+    font: inherit;
+    font-size: 1rem;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    width: 100%;
+  }
+  .form input:focus,
+  .form select:focus,
+  .form textarea:focus {
+    outline: 2px solid var(--gold);
+    border-color: transparent;
+  }
+  .form__consent {
+    display: flex !important;
+    grid-template-columns: none;
+    gap: 10px !important;
+    align-items: flex-start;
+    font-weight: 400 !important;
+    font-size: 0.85rem !important;
+    color: var(--muted);
+  }
+  .form__consent input {
+    margin-top: 4px;
+  }
+  .form__hp {
+    display: none;
+  }
+  .form button {
+    justify-self: start;
+  }
+  .form button[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .form__status {
+    margin: 0;
+    font-weight: 500;
+  }
+  .form__status.is-ok {
+    color: #1d7a46;
+  }
+  .form__status.is-error {
+    color: #b42318;
+  }
+  @media (max-width: 900px) {
+    .contact {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  @media (max-width: 560px) {
+    .form {
+      padding: 22px;
+    }
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
